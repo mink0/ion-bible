@@ -1,0 +1,464 @@
+ {
+   "10": {
+     "long_name": "Бытие",
+     "short_name": "Быт",
+     "book_color": "#ccccff",
+     "book_number": 10
+   },
+   "20": {
+     "long_name": "Исход",
+     "short_name": "Исх",
+     "book_color": "#ccccff",
+     "book_number": 20
+   },
+   "30": {
+     "long_name": "Левит",
+     "short_name": "Лев",
+     "book_color": "#ccccff",
+     "book_number": 30
+   },
+   "40": {
+     "long_name": "Числа",
+     "short_name": "Чис",
+     "book_color": "#ccccff",
+     "book_number": 40
+   },
+   "50": {
+     "long_name": "Второзаконие",
+     "short_name": "Втор",
+     "book_color": "#ccccff",
+     "book_number": 50
+   },
+   "60": {
+     "long_name": "Иисус Навин",
+     "short_name": "Нав",
+     "book_color": "#ffcc99",
+     "book_number": 60
+   },
+   "70": {
+     "long_name": "Судьи",
+     "short_name": "Суд",
+     "book_color": "#ffcc99",
+     "book_number": 70
+   },
+   "80": {
+     "long_name": "Руфь",
+     "short_name": "Руфь",
+     "book_color": "#ffcc99",
+     "book_number": 80
+   },
+   "90": {
+     "long_name": "1-я Царств",
+     "short_name": "1Цар",
+     "book_color": "#ffcc99",
+     "book_number": 90
+   },
+   "100": {
+     "long_name": "2-я Царств",
+     "short_name": "2Цар",
+     "book_color": "#ffcc99",
+     "book_number": 100
+   },
+   "110": {
+     "long_name": "3-я Царств",
+     "short_name": "3Цар",
+     "book_color": "#ffcc99",
+     "book_number": 110
+   },
+   "120": {
+     "long_name": "4-я Царств",
+     "short_name": "4Цар",
+     "book_color": "#ffcc99",
+     "book_number": 120
+   },
+   "130": {
+     "long_name": "1-я Паралипоменон",
+     "short_name": "1Пар",
+     "book_color": "#ffcc99",
+     "book_number": 130
+   },
+   "140": {
+     "long_name": "2-я Паралипоменон",
+     "short_name": "2Пар",
+     "book_color": "#ffcc99",
+     "book_number": 140
+   },
+   "150": {
+     "long_name": "1 Ездра",
+     "short_name": "1Езд",
+     "book_color": "#ffcc99",
+     "book_number": 150
+   },
+   "160": {
+     "long_name": "Неемия",
+     "short_name": "Неем",
+     "book_color": "#ffcc99",
+     "book_number": 160
+   },
+   "165": {
+     "long_name": "2 Ездра",
+     "short_name": "2Езд",
+     "book_color": "#C0C0C0",
+     "book_number": 165
+   },
+   "170": {
+     "long_name": "Товит",
+     "short_name": "Тов",
+     "book_color": "#C0C0C0",
+     "book_number": 170
+   },
+   "180": {
+     "long_name": "Иудифь",
+     "short_name": "Иудф",
+     "book_color": "#C0C0C0",
+     "book_number": 180
+   },
+   "190": {
+     "long_name": "Есфирь",
+     "short_name": "Есф",
+     "book_color": "#ffcc99",
+     "book_number": 190
+   },
+   "220": {
+     "long_name": "Иов",
+     "short_name": "Иов",
+     "book_color": "#66ff99",
+     "book_number": 220
+   },
+   "230": {
+     "long_name": "Псалтирь",
+     "short_name": "Пс",
+     "book_color": "#66ff99",
+     "book_number": 230
+   },
+   "240": {
+     "long_name": "Притчи",
+     "short_name": "Прит",
+     "book_color": "#66ff99",
+     "book_number": 240
+   },
+   "250": {
+     "long_name": "Екклесиаст",
+     "short_name": "Еккл",
+     "book_color": "#66ff99",
+     "book_number": 250
+   },
+   "260": {
+     "long_name": "Песня Песней",
+     "short_name": "Песн",
+     "book_color": "#66ff99",
+     "book_number": 260
+   },
+   "270": {
+     "long_name": "Премудрость Соломона",
+     "short_name": "Прем",
+     "book_color": "#C0C0C0",
+     "book_number": 270
+   },
+   "280": {
+     "long_name": "Сирах",
+     "short_name": "Сир",
+     "book_color": "#C0C0C0",
+     "book_number": 280
+   },
+   "290": {
+     "long_name": "Исаия",
+     "short_name": "Ис",
+     "book_color": "#ff9fb4",
+     "book_number": 290
+   },
+   "300": {
+     "long_name": "Иеремия",
+     "short_name": "Иер",
+     "book_color": "#ff9fb4",
+     "book_number": 300
+   },
+   "310": {
+     "long_name": "Плач Иеремии",
+     "short_name": "Плач",
+     "book_color": "#ff9fb4",
+     "book_number": 310
+   },
+   "315": {
+     "long_name": "Послание Иеремии",
+     "short_name": "Посл",
+     "book_color": "#C0C0C0",
+     "book_number": 315
+   },
+   "320": {
+     "long_name": "Варух",
+     "short_name": "Вар",
+     "book_color": "#C0C0C0",
+     "book_number": 320
+   },
+   "330": {
+     "long_name": "Иезекииль",
+     "short_name": "Иез",
+     "book_color": "#ff9fb4",
+     "book_number": 330
+   },
+   "340": {
+     "long_name": "Даниил",
+     "short_name": "Дан",
+     "book_color": "#ff9fb4",
+     "book_number": 340
+   },
+   "350": {
+     "long_name": "Осия",
+     "short_name": "Ос",
+     "book_color": "#ffff99",
+     "book_number": 350
+   },
+   "360": {
+     "long_name": "Иоиль",
+     "short_name": "Иоил",
+     "book_color": "#ffff99",
+     "book_number": 360
+   },
+   "370": {
+     "long_name": "Амос",
+     "short_name": "Ам",
+     "book_color": "#ffff99",
+     "book_number": 370
+   },
+   "380": {
+     "long_name": "Авдий",
+     "short_name": "Авд",
+     "book_color": "#ffff99",
+     "book_number": 380
+   },
+   "390": {
+     "long_name": "Иона",
+     "short_name": "Ион",
+     "book_color": "#ffff99",
+     "book_number": 390
+   },
+   "400": {
+     "long_name": "Михей",
+     "short_name": "Мих",
+     "book_color": "#ffff99",
+     "book_number": 400
+   },
+   "410": {
+     "long_name": "Наум",
+     "short_name": "Наум",
+     "book_color": "#ffff99",
+     "book_number": 410
+   },
+   "420": {
+     "long_name": "Аввакум",
+     "short_name": "Авв",
+     "book_color": "#ffff99",
+     "book_number": 420
+   },
+   "430": {
+     "long_name": "Софония",
+     "short_name": "Соф",
+     "book_color": "#ffff99",
+     "book_number": 430
+   },
+   "440": {
+     "long_name": "Аггей",
+     "short_name": "Агг",
+     "book_color": "#ffff99",
+     "book_number": 440
+   },
+   "450": {
+     "long_name": "Захария",
+     "short_name": "Зах",
+     "book_color": "#ffff99",
+     "book_number": 450
+   },
+   "460": {
+     "long_name": "Малахия",
+     "short_name": "Мал",
+     "book_color": "#ffff99",
+     "book_number": 460
+   },
+   "462": {
+     "long_name": "1 Маккавеев",
+     "short_name": "1Ма",
+     "book_color": "#C0C0C0",
+     "book_number": 462
+   },
+   "464": {
+     "long_name": "2 Маккавеев",
+     "short_name": "2Ма",
+     "book_color": "#C0C0C0",
+     "book_number": 464
+   },
+   "466": {
+     "long_name": "3 Маккавеев",
+     "short_name": "3Ма",
+     "book_color": "#C0C0C0",
+     "book_number": 466
+   },
+   "468": {
+     "long_name": "3 Ездра",
+     "short_name": "3Езд",
+     "book_color": "#C0C0C0",
+     "book_number": 468
+   },
+   "470": {
+     "long_name": "От Матфея",
+     "short_name": "Мат",
+     "book_color": "#ff6600",
+     "book_number": 470
+   },
+   "480": {
+     "long_name": "От Марка",
+     "short_name": "Мар",
+     "book_color": "#ff6600",
+     "book_number": 480
+   },
+   "490": {
+     "long_name": "От Луки",
+     "short_name": "Лук",
+     "book_color": "#ff6600",
+     "book_number": 490
+   },
+   "500": {
+     "long_name": "От Иоанна",
+     "short_name": "Ин",
+     "book_color": "#ff6600",
+     "book_number": 500
+   },
+   "510": {
+     "long_name": "Деяния",
+     "short_name": "Деян",
+     "book_color": "#00ffff",
+     "book_number": 510
+   },
+   "520": {
+     "long_name": "К Римлянам",
+     "short_name": "Рим",
+     "book_color": "#ffff00",
+     "book_number": 520
+   },
+   "530": {
+     "long_name": "1-е Коринфянам",
+     "short_name": "1Кор",
+     "book_color": "#ffff00",
+     "book_number": 530
+   },
+   "540": {
+     "long_name": "2-е Коринфянам",
+     "short_name": "2Кор",
+     "book_color": "#ffff00",
+     "book_number": 540
+   },
+   "550": {
+     "long_name": "К Галатам",
+     "short_name": "Гал",
+     "book_color": "#ffff00",
+     "book_number": 550
+   },
+   "560": {
+     "long_name": "К Ефесянам",
+     "short_name": "Еф",
+     "book_color": "#ffff00",
+     "book_number": 560
+   },
+   "570": {
+     "long_name": "К Филиппийцам",
+     "short_name": "Флп",
+     "book_color": "#ffff00",
+     "book_number": 570
+   },
+   "580": {
+     "long_name": "К Колоссянам",
+     "short_name": "Кол",
+     "book_color": "#ffff00",
+     "book_number": 580
+   },
+   "590": {
+     "long_name": "1-е Фессалоникийцам",
+     "short_name": "1Фес",
+     "book_color": "#ffff00",
+     "book_number": 590
+   },
+   "600": {
+     "long_name": "2-е Фессалоникийцам",
+     "short_name": "2Фес",
+     "book_color": "#ffff00",
+     "book_number": 600
+   },
+   "610": {
+     "long_name": "1-е Тимофею",
+     "short_name": "1Тим",
+     "book_color": "#ffff00",
+     "book_number": 610
+   },
+   "620": {
+     "long_name": "2-е Тимофею",
+     "short_name": "2Тим",
+     "book_color": "#ffff00",
+     "book_number": 620
+   },
+   "630": {
+     "long_name": "К Титу",
+     "short_name": "Тит",
+     "book_color": "#ffff00",
+     "book_number": 630
+   },
+   "640": {
+     "long_name": "К Филимону",
+     "short_name": "Флм",
+     "book_color": "#ffff00",
+     "book_number": 640
+   },
+   "650": {
+     "long_name": "К Евреям",
+     "short_name": "Евр",
+     "book_color": "#ffff00",
+     "book_number": 650
+   },
+   "660": {
+     "long_name": "Иакова",
+     "short_name": "Иак",
+     "book_color": "#00ff00",
+     "book_number": 660
+   },
+   "670": {
+     "long_name": "1-е Петра",
+     "short_name": "1Пет",
+     "book_color": "#00ff00",
+     "book_number": 670
+   },
+   "680": {
+     "long_name": "2-е Петра",
+     "short_name": "2Пет",
+     "book_color": "#00ff00",
+     "book_number": 680
+   },
+   "690": {
+     "long_name": "1-е Иоанна",
+     "short_name": "1Ин",
+     "book_color": "#00ff00",
+     "book_number": 690
+   },
+   "700": {
+     "long_name": "2-е Иоанна",
+     "short_name": "2Ин",
+     "book_color": "#00ff00",
+     "book_number": 700
+   },
+   "710": {
+     "long_name": "3-е Иоанна",
+     "short_name": "3Ин",
+     "book_color": "#00ff00",
+     "book_number": 710
+   },
+   "720": {
+     "long_name": "Иуды",
+     "short_name": "Иуд",
+     "book_color": "#00ff00",
+     "book_number": 720
+   },
+   "730": {
+     "long_name": "Откровение",
+     "short_name": "Откр",
+     "book_color": "#ff7c80",
+     "book_number": 730
+   }
+ }

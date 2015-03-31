@@ -1,0 +1,35 @@
+<ion-view view-title="{{vm.module.description}}">
+  <ion-content class="reader">
+    <div ng-if='vm.rbuttons.oldtes.length > 0'>
+      <h1 class="title">Ветхий Завет</h1>
+      <div ng-repeat="row in vm.rbuttons.oldtes">
+        <div class="button-bar bar-calm book-button">
+          <a class="button"
+            ng-repeat="i in vm.range() track by $index"
+            ng-class="{'selected': vm.selMask.mask[$index]}"
+            ng-click="vm.bookSel(row[$index])"
+            ng-style="{'color': row[$index].book_color}"
+            ng-disabled="!row[$index]">
+            {{row[$index].short_name}}
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div ng-if='vm.rbuttons.newtes.length > 0'>
+      <h1 class="title">Новый Завет</h1>
+      <div ng-repeat="row in vm.rbuttons.newtes">
+        <div class="button-bar bar-calm book-button">
+          <a class="button"
+            ng-repeat="i in vm.range() track by $index"
+            ng-class="{'selected': vm.selMask.mask[$index]}"
+            ng-click="vm.bookSel(row[$index])"
+            ng-style="{'color': row[$index].book_color}"
+            ng-disabled="!row[$index]">
+            {{row[$index].short_name}}
+          </a>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

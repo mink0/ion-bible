@@ -1,0 +1,10 @@
+<ion-view view-title="{{vm.book.long_name}}">
+  <ion-content class="reader">
+    <ion-list class="chapters-list">
+      <ion-item ng-class="{'selected': vm.selMask.mask[index]}" ng-click="vm.chapSelect(chap)" ng-repeat="(index, chap) in vm.chapters">
+        <span class="chapter">{{vm.chapterString}} {{chap.chapter}}</span>
+        <span class="verse" ng-bind="chap.text"></span>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

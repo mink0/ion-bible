@@ -1,0 +1,9 @@
+<ion-view view-title="{{vm.title}}" class="reader">
+  <ion-slide-box on-slide-changed="vm.slideHasChanged($index)">
+    <ion-slide dynamic-height class="padding reader" ng-repeat="page in vm.sliderPages">
+      <ion-scroll>
+        <div ng-include="page.path"></div>
+      </ion-scroll>
+    </ion-slide>
+  </ion-slide-box>
+</ion-view>
