@@ -21,10 +21,33 @@ $green: #2AA198;
 $calm: $bg-color - 120;
 $royal: #073642; 
 $energized: #2AA198; //#A57706;
+
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
+
+.left-panel {
+  background-color: #222222;
+  color: #F8F8F2;
+  ion-list {
+    .item {
+      border: 0;
+      border-top: 1px solid #121212;
+      // border-bottom: 1px solid #363636;
+      a {
+        font-size: 12px;
+        background-color: #333;
+        color: #F8F8F2;
+        &:active, &:hover, &.active, &.activated {
+          background-color: #5C9BA3; //#2AA198;
+        }
+      }
+    }
+  }
+}
+
+
 .reader {
   font-size: 16px;
   color: $text-color;

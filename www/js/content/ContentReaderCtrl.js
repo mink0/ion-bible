@@ -6,7 +6,7 @@
     .controller('ContentReaderCtrl', ContentReaderCtrl);
 
   /* @ngInject */
-  function ContentReaderCtrl(contentReader, dataService, notify, $stateParams, $ionicSlideBoxDelegate, navigation, checkBookUrl, $rootScope, pages, common) {
+  function ContentReaderCtrl(contentReader, dataService, notify, $stateParams, $ionicScrollDelegate, $ionicPosition, $ionicSlideBoxDelegate, navigation, checkBookUrl, $rootScope, pages, common) {
     var vm = this;
     // if (!checkBookUrl()) return;
     vm.moduleId = $stateParams.moduleId;
@@ -21,6 +21,13 @@
     vm.title = '';
     vm.isPrevChap = true;
     vm.isNextChap = true;
+
+    // vm.onScroll = function(e) {
+    //   console.log($ionicScrollDelegate);
+    //   //$ionicPosition
+    //   //
+    // };
+
 
     activate();
 

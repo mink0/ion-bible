@@ -43,7 +43,7 @@
     function defModChange(oldval, newval) {
       if (oldval !== newval) {
         settings.save({'defaultModuleId': vm.defaultModuleId});
-        // dataService.initBModules();
+        dataService.initBModules();
       }
     }
 
