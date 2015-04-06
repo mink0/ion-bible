@@ -6,14 +6,14 @@
           <h3 ng-if="vm.chapterId != 0" class="chap-title">{{vm.module.chapter_string}} {{vm.chapterId}}</h3>
           <h3 ng-if="vm.chapterId == 0" class="chap-title">Введение</h3>
           <div class="verses" ng-repeat="verse in page.verses">
-              <span class="verse-no">{{verse.verse}}.</span>&nbsp;
-              <span html-compile="verse.text"></span>
+            <span class="verse-no">{{verse.verse}}.</span>&nbsp;
+            <span html-compile="verse.text"></span>
           </div>
         </div>
         <div class="nav-reader">
           <div class="button-bar">
-            <button ng-disabled='!vm.isPrevChap' ng-click="vm.prevChapter(page.moduleId)" class="button button-outline ion1-chevron-up button-energized">Предыдущая глава</button>
-            <button ng-disabled='!vm.isNextChap' ng-click="vm.nextChapter(page.moduleId)" class="button button-outline ion1-chevron-down button-energized">Следующая глава</button>
+            <button ng-disabled='!page.prevChapAvail' ng-click="vm.prevChapter(page.moduleId)" class="button button-outline ion1-chevron-up button-energized">Предыдущая глава</button>
+            <button ng-disabled='!page.nextChapAvail' ng-click="vm.nextChapter(page.moduleId)" class="button button-outline ion1-chevron-down button-energized">Следующая глава</button>
           </div>
         </div>
       </ion-content>

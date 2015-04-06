@@ -113,8 +113,6 @@
     }
 
     function loadPages(bookId, chapterId) {
-      //var cbcount = 0;
-      //var pages = {};
       var d = $q.defer();
       var promises = {};
 

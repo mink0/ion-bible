@@ -6,7 +6,7 @@
     .controller('ContentReaderCtrl', ContentReaderCtrl);
 
   /* @ngInject */
-  function ContentReaderCtrl(contentReader, dataService, notify, $stateParams, $ionicScrollDelegate, $ionicPosition, $ionicSlideBoxDelegate, navigation, checkBookUrl, $rootScope, pages, common) {
+  function ContentReaderCtrl(contentReader, dataService, notify, $stateParams, navigation, checkBookUrl, $rootScope, slides, common) {
     var vm = this;
     // if (!checkBookUrl()) return;
     vm.moduleId = $stateParams.moduleId;
@@ -17,7 +17,7 @@
     vm.slideHasChanged = sliderHasChanged;
     vm.nextChapter = navigation.nextChapter;
     vm.prevChapter = navigation.prevChapter;
-    vm.slides = contentReader.makeSlides(pages, vm);
+    vm.slides = slides;
     vm.title = '';
     vm.isPrevChap = true;
     vm.isNextChap = true;
@@ -30,17 +30,11 @@
       var off = $rootScope.$on('$ionicView.enter', function(viewInfo, state) {
         // FIXME: strange ion-view behavior. we need to wait the view to activate and then change the title.
         // console.log('SERVICE - $ionicView.loaded', viewInfo, state);
+
         // change title
         sliderHasChanged(0);
-        off();
-      });
 
-      // FIXME: this should be checked per module!
-      vm.module.getChapter(vm.bookId, parseInt(vm.chapterId) + 1).then(function(chapter) {
-        if (!chapter) vm.isNextChap = false;
-      });
-      vm.module.getChapter(vm.bookId, parseInt(vm.chapterId) - 1).then(function(chapter) {
-        if (!chapter) vm.isPrevChap = false;
+        off();
       });
     }
 
