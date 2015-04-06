@@ -10,7 +10,12 @@
     var service = {
       findBModules: findBModules,
       save: save,
-      load: load
+      load: load,
+      history: {
+        maxlen: 30,
+        add: historyAdd,
+        get: historyGet
+      }
     };
     return service;
 
@@ -20,7 +25,7 @@
       var d = $q.defer();
       var found = [];
       dataService.findBModules(function(err, res) {
-        if (err) return;
+      if (err) return;
 
         for (var fname in res) {
           found.push({
@@ -48,6 +53,10 @@
         .success(function(books) {
           common.defaultBooks = books;
           common.settings = storage.getObject('settings');
+          // init history
+          if (!common.settings.hasOwnProperty('history')) {
+            common.settings.history = [];
+          }
           d.resolve(common.settings);
         })
         .error(function(){
@@ -55,6 +64,24 @@
         });
       });
       return d.promise;      
+    }
+
+    function historyAdd(item) {
+      var hist = common.settings.history;
+      // while (hist.length >= service.history.maxlen) {
+      //   hist.shift();
+      // }
+      hist.unshift(item);
+      if (hist.length >= service.history.maxlen) {
+        var delCount = hist.length - service.history.maxlen;
+        hist.splice(service.history.maxlen - 1, delCount);
+      }
+
+      service.save();
+    }
+
+    function historyGet() {
+      return common.settings.history;
     }
   }
 })();

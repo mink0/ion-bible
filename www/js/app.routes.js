@@ -71,8 +71,9 @@
           }
         },
         resolve: {
-          pages: function(bmodules, dataService, $stateParams, common, mock) {
+          pages: function(bmodules, dataService, $stateParams, common, mock, settings) {
             if (common.debug) return mock.load('pages.json');
+            settings.history.add($stateParams);
             return dataService.loadPages($stateParams.bookId, $stateParams.chapterId);
           }
         }
@@ -89,6 +90,17 @@
         }
       })
 
+      .state('app.history', {
+        url: '/history',
+        parent: 'app',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/history.html',
+            controller: 'HistoryCtrl as vm'
+          }
+        }
+      })
+
       .state('app.about', {
         url: '/about',
         parent: 'app',
@@ -100,7 +112,7 @@
       });
 
       // if none of the above states are matched, use this as the fallback
-      $urlRouterProvider.otherwise('/about');
+      $urlRouterProvider.otherwise('/history');
     });
 
   angular.module('bq')

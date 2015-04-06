@@ -20,15 +20,18 @@
       // Show the action sheet
       if (!mainContextMenu) {
         mainContextMenu = $ionicActionSheet.show({
-          buttons: [
-          {
+          buttons: [{
             text: 'Настройки',
             //cssClass: 'icon ion-settings',
             cb: function() {
               $state.go('app.settings');
             }
-          },
-          {
+          }, {
+            text: 'История',
+            cb: function() {
+              $state.go('app.history'); 
+            }
+          }, {
             text: 'Выбор модуля',
             cb: function() {
               $ionicSideMenuDelegate.toggleLeft(true);

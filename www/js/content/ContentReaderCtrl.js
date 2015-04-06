@@ -22,26 +22,20 @@
     vm.isPrevChap = true;
     vm.isNextChap = true;
 
-    // vm.onScroll = function(e) {
-    //   console.log($ionicScrollDelegate);
-    //   //$ionicPosition
-    //   //
-    // };
-
-
     activate();
 
     ////////////////
 
     function activate() {
       var off = $rootScope.$on('$ionicView.enter', function(viewInfo, state) {
-        //FIXME: strange ion-view behavior. we need to wait the view to activate and then change the title.
+        // FIXME: strange ion-view behavior. we need to wait the view to activate and then change the title.
         // console.log('SERVICE - $ionicView.loaded', viewInfo, state);
         // change title
         sliderHasChanged(0);
         off();
       });
 
+      // FIXME: this should be checked per module!
       vm.module.getChapter(vm.bookId, parseInt(vm.chapterId) + 1).then(function(chapter) {
         if (!chapter) vm.isNextChap = false;
       });
@@ -53,7 +47,7 @@
     function sliderHasChanged(index) {
       if (common.debug) return;
       vm.module.getBook(vm.bookId).then(function(book) {
-        vm.title = '[' + dataService.bmodules[vm.slides[index].moduleId].name + '] ' + book.short_name + '. ' + vm.chapterId + ': ';
+        vm.title = '[' + dataService.bmodules[vm.slides[index].moduleId].name + '] ' + book.short_name + '. ' + vm.chapterId;
       });
     }
 
