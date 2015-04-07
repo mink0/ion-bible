@@ -51,7 +51,7 @@
         }, function(err) {
           return d.reject(err);
         });
-      
+
       return d.promise;
     }
     BModule.prototype.loadBooks = function() {
@@ -190,32 +190,37 @@
       }
       return d.promise;
     };
+    //SELECT max(chapter), min(chapter)  FROM verses WHERE book_number = 470
+    //SELECT min(chapter_number_from), max(chapter_number_to) FROM commentaries WHERE book_number = 470
     BModule.prototype.loadPage = function(bookId, chapterId) {
       notify.show();
       var self = this;
       var d = $q.defer();
       var page = [];
-      var query, vars;
+      var query1, query2, vars1;
       if (self.type == 1) {
+        query2 = 'SELECT min(chapter_number_from) as min, max(chapter_number_to) as max FROM commentaries WHERE book_number = ?';
         if (chapterId == 0) {
           // Intro text
-          query = 'SELECT text, verse_number_from, verse_number_to FROM commentaries ' +
+          query1 = 'SELECT text, verse_number_from, verse_number_to FROM commentaries ' +
             'WHERE book_number = ? AND chapter_number_from = 0 AND chapter_number_to is Null ' +
             'ORDER BY verse_number_from';
-          vars = [bookId];
+          vars1 = [bookId];
         } else {
-          query = 'SELECT text, verse_number_from, verse_number_to FROM commentaries ' +
+          query1 = 'SELECT text, verse_number_from, verse_number_to FROM commentaries ' +
             'WHERE book_number = ? AND chapter_number_from >= ? AND chapter_number_to <= ?' +
             'ORDER BY verse_number_from';
-          vars = [bookId, chapterId, chapterId];
+          vars1 = [bookId, chapterId, chapterId];
         }
       } else {
-        query = 'SELECT verse, text FROM verses WHERE book_number = ? AND chapter = ? ORDER BY verse';
-        vars = [bookId, chapterId];
+        query1 = 'SELECT verse, text FROM verses WHERE book_number = ? AND chapter = ? ORDER BY verse';
+        query2 = 'SELECT min(chapter) as min, max(chapter) as max FROM verses WHERE book_number = ?';
+        vars1 = [bookId, chapterId];
       }
-      $cordovaSQLite.execute(this.db, query, vars)
-        .then(function(res) {
-          //console.log(res);
+      $cordovaSQLite.execute(self.db, query1, vars1).then(function(res) {
+        $cordovaSQLite.execute(self.db, query2, [bookId]).then(function(stat) {
+          // console.log('res', res);
+          // console.log('sta', stat);
           for (var i = 0; i < res.rows.length; i++) {
             // FIXME: tags should work!
             if (self.type == 1) {
@@ -239,12 +244,15 @@
             }
           }
           notify.hide();
+          page.minChapNo = stat.rows.item(0).min;
+          page.maxChapNo = stat.rows.item(0).max;
           d.resolve(page);
-        }, function(err) {
-          notify.hide();
-          notify.alert(err);
-          d.reject(err);
         });
+      }, function(err) {
+        notify.hide();
+        notify.alert(err);
+        d.reject(err);
+      });
       return d.promise;
     };
     BModule.prototype.loadVerse = function(bookId, chapterId, verseId) {

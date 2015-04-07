@@ -25,7 +25,7 @@
       var d = $q.defer();
       var found = [];
       dataService.findBModules(function(err, res) {
-      if (err) return;
+        if (err) return;
 
         for (var fname in res) {
           found.push({
@@ -36,7 +36,7 @@
 
         d.resolve(found);
       });
-    
+
       return d.promise;
     }
 
@@ -50,34 +50,37 @@
       var d = $q.defer();
       $ionicPlatform.ready(function() {
         $http.get('js/bmodule/defaultBooks.json')
-        .success(function(books) {
-          common.defaultBooks = books;
-          common.settings = storage.getObject('settings');
-          // init history
-          if (!common.settings.hasOwnProperty('history')) {
-            common.settings.history = [];
-          }
-          d.resolve(common.settings);
-        })
-        .error(function(){
-          notify.alert('Ошибка загрузки "defaultBooks.json"');
-        });
+          .success(function(books) {
+            common.defaultBooks = books;
+            common.settings = storage.getObject('settings');
+            // init history
+            if (!common.settings.hasOwnProperty('history')) {
+              common.settings.history = [];
+            }
+            d.resolve(common.settings);
+          })
+          .error(function() {
+            notify.alert('Ошибка загрузки "defaultBooks.json"');
+          });
       });
-      return d.promise;      
+      return d.promise;
     }
 
     function historyAdd(item) {
       var hist = common.settings.history;
-      // while (hist.length >= service.history.maxlen) {
-      //   hist.shift();
-      // }
-      hist.unshift(item);
-      if (hist.length >= service.history.maxlen) {
-        var delCount = hist.length - service.history.maxlen;
-        hist.splice(service.history.maxlen - 1, delCount);
-      }
+      if (hist.length > 0 && JSON.stringify(item) != JSON.stringify(hist[0])) {
 
-      service.save();
+        // while (hist.length >= service.history.maxlen) {
+        //   hist.shift();
+        // }
+        hist.unshift(item);
+        if (hist.length >= service.history.maxlen) {
+          var delCount = hist.length - service.history.maxlen;
+          hist.splice(service.history.maxlen - 1, delCount);
+        }
+
+        service.save();
+      }
     }
 
     function historyGet() {
