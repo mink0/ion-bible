@@ -75,9 +75,6 @@
             if (common.debug) return mock.load('pages.json');
             settings.history.add($stateParams);
             return dataService.loadPages($stateParams.bookId, $stateParams.chapterId);
-          },
-          slides: function (contentReader, pages, $stateParams) {
-            return contentReader.makeSlides(pages, $stateParams);
           }
         }
       })
