@@ -17,11 +17,8 @@
     vm.slideHasChanged = sliderHasChanged;
     vm.nextChapter = navigation.nextChapter;
     vm.prevChapter = navigation.prevChapter;
-    vm.slides = slides;
+    vm.slides = contentReader.makeSlides;
     vm.title = '';
-    vm.isPrevChap = true;
-    vm.isNextChap = true;
-
     activate();
 
     ////////////////
