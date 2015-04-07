@@ -68,7 +68,7 @@
 
     function historyAdd(item) {
       var hist = common.settings.history;
-      if (hist.length > 0 && JSON.stringify(item) != JSON.stringify(hist[0])) {
+      if (hist.length === 0 || JSON.stringify(item) != JSON.stringify(hist[0])) {
 
         // while (hist.length >= service.history.maxlen) {
         //   hist.shift();

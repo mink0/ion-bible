@@ -64,7 +64,6 @@
       return currentScroll;
     }
 
-
     function nextChapter(fromId) {
       var opts = $stateParams;
       opts.moduleId = fromId;
