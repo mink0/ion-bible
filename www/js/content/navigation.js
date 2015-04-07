@@ -66,7 +66,6 @@
 
 
     function nextChapter(fromId) {
-      console.log(fromId);
       var opts = $stateParams;
       opts.moduleId = fromId;
       goToChapter(parseInt(opts.chapterId) + 1);

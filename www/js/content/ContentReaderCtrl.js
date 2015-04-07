@@ -6,7 +6,7 @@
     .controller('ContentReaderCtrl', ContentReaderCtrl);
 
   /* @ngInject */
-  function ContentReaderCtrl(contentReader, dataService, notify, $stateParams, navigation, checkBookUrl, $rootScope, slides, common) {
+  function ContentReaderCtrl(contentReader, dataService, notify, $stateParams, navigation, checkBookUrl, $rootScope, pages, common) {
     var vm = this;
     // if (!checkBookUrl()) return;
     vm.moduleId = $stateParams.moduleId;
@@ -17,7 +17,7 @@
     vm.slideHasChanged = sliderHasChanged;
     vm.nextChapter = navigation.nextChapter;
     vm.prevChapter = navigation.prevChapter;
-    vm.slides = contentReader.makeSlides;
+    vm.slides = contentReader.makeSlides(pages, $stateParams);
     vm.title = '';
     activate();
 
