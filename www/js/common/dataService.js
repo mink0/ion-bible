@@ -54,6 +54,7 @@
               var defaultModuleId = common.settings.defaultModuleId || common.defaultModuleId;
               if (service.bmodules.hasOwnProperty(defaultModuleId)) {
                 service.defaultModule = service.bmodules[defaultModuleId];
+                service.defaultModule.loadBooks(); // for verses modal title
               } else {
                 notify.flash('Не загружен дефолтный модуль ' + defaultModuleId + ' (полный функционал будет недоступен)');
               }
