@@ -3,7 +3,7 @@
     <ion-list class="chapters-list">
       <ion-item ng-click="vm.select(item)" ng-repeat="(index, item) in vm.histList">
         <span class="chapter">{{item.text}} {{item.chapter}}</span>
-        <span class="verse" ng-bind="vm.verses[index]"></span>
+        <span class="verse">{{vm.verses[index]}}</span>
       </ion-item>
     </ion-list>
   </ion-content>

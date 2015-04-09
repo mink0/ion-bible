@@ -31,7 +31,10 @@
         if (dataService.bmodules.hasOwnProperty(mname)) {
           mname = dataService.bmodules[mname].name;
           promises.push(dataService.bmodules[hist[i].moduleId].loadVerse(hist[i].bookId, hist[i].chapterId, 1));
+        } else {
+          promises.push('');
         }
+
         var bname = hist[i].bookId;
         if (common.defaultBooks[bname]) {
           bname = common.defaultBooks[bname].short_name;
@@ -42,7 +45,11 @@
         });
       }
       
-      $q.all(promises).then(function (verses) {
+      $q.all(promises).then(function(versesFull) {
+        var verses = [];
+        for (var i = 0; i < versesFull.length; i++) {
+          verses[i] = versesFull[i].slice(0, 128) + '...';
+        }
         vm.verses = verses;
       });
       return histList;
