@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('bq', ['ionic', 'ngCordova'])
-    .run(function($ionicPlatform, dataService, $rootScope, $ionicConfig, $ionicGesture, appRestoreState) {
+    .run(function($ionicPlatform, dataService, $rootScope, $ionicConfig, $ionicGesture, appRestoreState, common) {
       $ionicPlatform.ready(function() {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
@@ -38,7 +38,6 @@
         $ionicPlatform.on('doubletap', function() {
           $rootScope.$emit('onDoubleTap');
         });
-
       
         // ionic related config
         $ionicConfig.tabs.position('bottom'); // place tabs

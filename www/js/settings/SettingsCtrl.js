@@ -15,6 +15,8 @@
     vm.modulesChange = modulesChange;
     vm.defModChange = defModChange;
     vm.restartApp = restartApp;
+    vm.fullScreen = common.settings.appFullScreen;
+    vm.fullScreenChange = fullScreenChange;
     $scope.$watch('vm.defaultModuleId', defModChange);
     var isFirst = false;
 
@@ -51,6 +53,11 @@
       appRestoreState.saveAppState();
       window.location.reload(true);
       //$ionicHistory.clearHistory();
+    }
+
+    function fullScreenChange() {
+      settings.save({'appFullScreen': vm.fullScreen});
+      ionic.Platform.fullScreen(true, !vm.fullScreen);
     }
   }
 })();

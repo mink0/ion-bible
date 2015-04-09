@@ -53,9 +53,13 @@
           .success(function(books) {
             common.defaultBooks = books;
             common.settings = storage.getObject('settings');
-            // init history
+            
+            // init vars for the first time
             if (!common.settings.hasOwnProperty('history')) {
               common.settings.history = [];
+            }
+            if (!common.settings.hasOwnProperty('appFullScreen')) {
+              common.settings.appFullScreen = false;
             }
             d.resolve(common.settings);
           })

@@ -1,4 +1,4 @@
-<ion-view view-title="{{vm.title}}" class="reader">
+<ion-view view-title="{{vm.title}}" class="reader" hide-nav-bar="vm.settings.appFullScreen">
   <ion-slide-box on-slide-changed="vm.slideHasChanged($index)" show-pager="true">
     <ion-slide ng-repeat="page in vm.slides">
       <ion-content id="{{page.uid}}" delegate-handle="page.uid" class="padding">

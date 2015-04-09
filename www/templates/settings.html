@@ -1,14 +1,22 @@
 <ion-view view-title="Настройки">
   <ion-content class="padding">
     <div class="list list-inset">
-      <!--       <div class="item item-divider">
-        Выбор библейских модулей
+      <div class="item item-divider">
+        Общие
       </div>
- -->
-      <!--       <ion-toggle toggle-class="toggle toggle-assertive" ng-repeat="m in vm.foundModules" ng-model="m.checked" ng-checked="m.checked">
-        {{ m.text }}
-      </ion-toggle>
- -->
+      <ion-item class="item item-toggle">
+        Полноэкранный режим
+        <label class="toggle">
+          <input type="checkbox" ng-model="vm.fullScreen" ng-checked="vm.fullScreen" ng-click="vm.fullScreenChange()">
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+        </label>
+      </ion-item>
+      </label>
+    </div>
+
+    <div class="list list-inset">
       <ion-list show-reorder="true" delegate-handle="app.settings">
         <div class="item item-divider">
           Выбор библейских модулей
@@ -24,7 +32,6 @@
         </ion-item>
       </ion-list>
     </div>
-
     <div class="list list-inset">
       <div class="item item-divider">
         Модуль по умолчанию

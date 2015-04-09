@@ -6,7 +6,7 @@
     .controller('ContentReaderCtrl', ContentReaderCtrl);
 
   /* @ngInject */
-  function ContentReaderCtrl(contentReader, dataService, notify, $stateParams, navigation, checkBookUrl, $rootScope, pages, common) {
+  function ContentReaderCtrl($rootScope, contentReader, dataService, notify, $stateParams, $ionicScrollDelegate, navigation, checkBookUrl, pages, common) {
     var vm = this;
     // if (!checkBookUrl()) return;
     vm.moduleId = $stateParams.moduleId;
@@ -19,6 +19,8 @@
     vm.prevChapter = navigation.prevChapter;
     vm.slides = contentReader.makeSlides(pages, $stateParams);
     vm.title = '';
+    vm.settings = common.settings;
+
     activate();
 
     ////////////////
@@ -41,6 +43,5 @@
         vm.title = '[' + dataService.bmodules[vm.slides[index].moduleId].name + '] ' + book.short_name + '. ' + vm.chapterId;
       });
     }
-
   }
 })();

@@ -54,15 +54,22 @@
       
       common.settings = storage.getObject('settings');
 
-
       // restore all ionic scrolls position
       var readerScrollPos = storage.getObject('readerScrollPos');
       if (readerScrollPos && Object.keys(readerScrollPos).length > 0) {
         var off = $rootScope.$on('$ionicView.afterEnter', function(viewInfo, state) {
+          $timeout(restoreFullScreen, 50);
           //FIXME: strange additional timeout is needed
           $timeout(restoreScrollPos, 200);
           off();
         });
+      }
+
+      function restoreFullScreen() {
+        // restore fullscreen status
+        if (common.settings.appFullScreen) {
+          ionic.Platform.fullScreen(true, false);
+        }
       }
 
       function restoreScrollPos() {

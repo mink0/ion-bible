@@ -12,14 +12,14 @@
     </ion-content>
   </ion-side-menu>
   <ion-side-menu-content>
-    <ion-nav-bar class="bar-dark" hide-back-button="true" ng-if="!vm.hideNavbar">
+    <ion-nav-bar class="bar-dark">
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+      </ion-nav-buttons>
       <!--
       <ion-nav-back-button>
       </ion-nav-back-button>
       --> 
-      <ion-nav-buttons side="left">
-        <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
-      </ion-nav-buttons>
       <!--
       <ion-nav-buttons side="right">
       <button class="button button-clear button-light ion-ios-book"></button>

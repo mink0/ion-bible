@@ -6,45 +6,40 @@
     .factory('navigation', navigation);
 
   /* @ngInject */
-  function navigation(dataService, $stateParams, $state, $ionicScrollDelegate, $ionicSlideBoxDelegate, $rootScope, contentReader) {
+  function navigation(dataService, $stateParams, $state, $ionicScrollDelegate, $ionicSlideBoxDelegate, $rootScope, contentReader, common) {
     var service = {
       nextChapter: nextChapter,
       prevChapter: prevChapter
     };
-    $rootScope.$on('onVolumeDown', scrollDown);
-    $rootScope.$on('onVolumeUp', scrollUp);
-
+    $rootScope.$on('onVolumeDown', function() {scroll('down');});
+    $rootScope.$on('onVolumeUp', function() {scroll('up');});
 
     return service;
 
     ////////////////
 
-    function scrollDown(e) {
-      console.log('page down');
+    function scroll(arg) {
+      console.log('scroll' + arg);
+      var mul = 1;
+      if (arg === 'up') mul = -1;
+      var contentHeight;
+      
       if ($state.is('app.reader')) {
         // FIXME
         // https://github.com/driftyco/ionic/issues/1865
         // console.log($window.innerHeight)
-        var ionContentHeight = document.getElementsByTagName('ion-content')[0].clientHeight; // hack. fix needed.
-        getCurScroll().scrollBy(0, ionContentHeight, true); // $ionicScrollDelegate.$getByHandle(vm.index).scrollBy(0, ionContentHeight);
+        contentHeight = document.getElementsByTagName('ion-content')[0].clientHeight; // hack. fix needed.
+        if (common.settings.appFullScreen) contentHeight = window.innerHeight;
+        getCurScroll().scrollBy(0, mul * contentHeight, true); // $ionicScrollDelegate.$getByHandle(vm.index).scrollBy(0, ionContentHeight);
       } else {
-        var curView = $ionicScrollDelegate.getScrollView();
-        var contentHeight = curView.__clientHeight;
-        $ionicScrollDelegate.scrollBy(0, contentHeight);
-      }
-    }
-
-    function scrollUp(e) {
-      console.log('page up');
-      var ionContentHeight = document.getElementsByTagName('ion-content')[0].clientHeight; // hack. fix needed.
-      if ($state.is('app.reader')) {
-        // FIXME
-        getCurScroll().scrollBy(0, -ionContentHeight), true; // $ionicScrollDelegate.$getByHandle(vm.index).scrollBy(0, ionContentHeight);
-      } else {
-        var curView = $ionicScrollDelegate.getScrollView();
-        var contentHeight = curView.__clientHeight;
-        $ionicScrollDelegate.scrollBy(0, -contentHeight);
-      }
+        if (!common.settings.appFullScreen) {
+          var curView = $ionicScrollDelegate.getScrollView();
+          contentHeight = curView.__clientHeight;
+        } else {
+          contentHeight = window.innerHeight;
+        }
+        $ionicScrollDelegate.scrollBy(0, mul*contentHeight);
+      }          
     }
 
     function getCurScroll() {

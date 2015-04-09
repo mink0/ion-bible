@@ -6,11 +6,12 @@
     .factory('contentReader', contentReader);
 
   /* @ngInject */
-  function contentReader() {
+  function contentReader($rootScope, common, $state) {
     var service = {
       slides: [],
       makeSlides: makeSlides
     };
+    $rootScope.$on('onDoubleTap', fullScreenToggle);
     return service;
 
     ////////////////
@@ -43,5 +44,13 @@
 
       return service.slides;
     }
+    
+    function fullScreenToggle() {
+      if ($state.is('app.reader')) {
+        common.settings.appFullScreen = !common.settings.appFullScreen;
+        ionic.Platform.fullScreen(true, !common.settings.appFullScreen);
+      }
+    }  
+
   }
 })();
