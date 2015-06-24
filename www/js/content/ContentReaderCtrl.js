@@ -48,10 +48,10 @@
       vm.module.getBook(vm.bookId).then(function(book) {
         //vm.title = '[' + dataService.bmodules[vm.slides[index].moduleId].name + '] ' + book.short_name + '. ' + vm.chapterId;
         //vm.titleBook = dataService.bmodules[vm.slides[index].moduleId].description + ': ' + book.short_name + '. ' + vm.chapterId;
-        vm.titleBook = '<div style="position:relative;">' +
-          dataService.bmodules[vm.slides[index].moduleId].description + ': <span class="sub-title-right">' + book.short_name + '. ' + vm.chapterId +
-          '</span></div>';
-
+        vm.titleBook = 
+          '<div>' +
+            dataService.bmodules[vm.slides[index].moduleId].description + 
+            ': <span class="sub-title-right">' + book.short_name + '. ' + vm.chapterId + '</span></div>';
       });
     }
   }
