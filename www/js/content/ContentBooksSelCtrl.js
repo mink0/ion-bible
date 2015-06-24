@@ -14,7 +14,7 @@
     vm.bookSel = bookSel;
     vm.moduleId = $stateParams.moduleId;
     vm.module = dataService.bmodules[vm.moduleId];
-    vm.selMask = new common.ListSelectedMask(books.length);
+    //vm.selMask = new common.ListSelectedMask(books.length);
     vm.rbuttons = contentBooksSel.makeButtons(books, vm.rowlen);
     vm.range = function() {
       return new Array(vm.rowlen);

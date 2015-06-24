@@ -14,19 +14,21 @@
     var service = {
       saveAppState: saveAppState,
       restoreAppState: restoreAppState,
+      exitApp: exitApp
     };
-    $rootScope.$on('onReady', restoreAppState);
+    //$rootScope.$on('onReady', restoreAppState);
+    //$rootScope.$on('onExitApp', exitApp);
     $rootScope.$on('onPause', saveAppState);
     $rootScope.$on('onBackButton', function() {
       if ($state.is('app.reader')) {
         saveAppState();
       }
     });
-    $rootScope.$on('onExitApp', exitApp);
 
     return service;
 
     function saveAppState() {
+      console.log('Saving app state...', $window.location.href);
       storage.set('lastUrl', $window.location.href);
 
       // save all reader's ionicScrolls
@@ -45,15 +47,13 @@
       storage.setObject('readerScrollPos', readerScrollPos);
       storage.set('readerActiveSlide', contentReader.slides[$ionicSlideBoxDelegate.currentIndex()].moduleId);
       settings.save();
-      // console.log('Saving state', $window.location.href);
     }
 
     function restoreAppState() {
+      console.log('Restoring app state...');
+      // last active page
       var url = storage.get('lastUrl');
       if (url) $window.location.href = url;
-      
-      common.settings = storage.getObject('settings');
-
       // restore all ionic scrolls position
       var readerScrollPos = storage.getObject('readerScrollPos');
       if (readerScrollPos && Object.keys(readerScrollPos).length > 0) {
@@ -75,7 +75,6 @@
       function restoreScrollPos() {
         // FIXME: hack, until https://github.com/driftyco/ionic/issues/1865 is fixed
         var instances = $ionicScrollDelegate._instances;
-        console.log(readerScrollPos);
         for (var i = 0; i < instances.length; i++) {
           var id = instances[i].$element[0].id;
           if (readerScrollPos.hasOwnProperty(id)) {
@@ -88,8 +87,6 @@
         for (var i = 0; i < contentReader.slides.length; i++) {
           if (contentReader.slides[i].moduleId == moduleId) {
             sliderIndex = i;
-            console.log(moduleId);
-            console.log(i);
             break;
           }
         }

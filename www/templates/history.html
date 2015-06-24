@@ -1,5 +1,5 @@
 <ion-view view-title="История просмотра">
-  <ion-content class="reader">
+  <ion-content overflow-scroll="true" class="reader">
     <ion-list class="chapters-list">
       <ion-item ng-click="vm.select(item)" ng-repeat="(index, item) in vm.histList">
         <span class="chapter">{{item.text}} {{item.chapter}}</span>

@@ -62,7 +62,7 @@
       })
 
       .state('app.reader', {
-        url: '/books/:moduleId/:bookId/:chapterId',
+        url: '/books/:moduleId/:bookId/:chapterId/:searchText',
         parent: 'app',
         views: {
           'menuContent': {
@@ -91,12 +91,36 @@
       })
 
       .state('app.history', {
+        cache: false,
         url: '/history',
         parent: 'app',
         views: {
           'menuContent': {
             templateUrl: 'templates/history.html',
             controller: 'HistoryCtrl as vm'
+          }
+        }
+      })
+
+      // .state('app.search', {
+      //   url: '/search',
+      //   parent: 'app',
+      //   views: {
+      //     'menuContent': {
+      //       templateUrl: 'templates/search.html',
+      //       controller: 'SearchCtrl as vm'
+      //     }
+      //   }
+      // })
+
+      .state('app.search-results', {
+        url: '/search/results',
+        // cache: false,  // back button don't work
+        parent: 'app',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/search-results.html',
+            controller: 'SearchResultsCtrl as vm'
           }
         }
       })
@@ -112,7 +136,7 @@
       });
 
       // if none of the above states are matched, use this as the fallback
-      $urlRouterProvider.otherwise('/history');
+      $urlRouterProvider.otherwise('/about');
     });
 
   angular.module('bq')
@@ -127,7 +151,7 @@
       if (common.debug) {
         // ui router is hard to debug
         $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-          console.log('$stateChangeStart to ' + toState.to + '- fired when the transition begins. toState,toParams : \n', toState, toParams);
+          console.log('$stateChangeStart to ' + toState.to + '- fired when the transition begins. toState, toParams: \n', toState, toParams);
         });
         $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error) {
           console.log('$stateChangeError - fired when an error occurs during transition.');

@@ -26,7 +26,7 @@
                   cssClass: 'modal-verse',
                   buttons: [{
                     text: 'OK',
-                    type: 'button-energized'
+                    type: 'button-positive'
                   }]
                 });
               });

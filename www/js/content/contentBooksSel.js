@@ -14,8 +14,10 @@
 
     ////////////////
 
+    /**
+     * create rows with buttons for book selection page
+     */
     function makeButtons(books, rowlen) {
-      // create rows with buttons for book selection
       var rbuttons = {
         oldtes: [],
         newtes: []

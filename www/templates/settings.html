@@ -6,16 +6,29 @@
       </div>
       <ion-item class="item item-toggle">
         Полноэкранный режим
-        <label class="toggle">
-          <input type="checkbox" ng-model="vm.fullScreen" ng-checked="vm.fullScreen" ng-click="vm.fullScreenChange()">
+        <label class="toggle toggle-royal">
+          <input type="checkbox" ng-model="vm.settings.appFullScreen" ng-checked="vm.settings.fullScreen" ng-click="vm.fullScreenChange()">
           <div class="track">
             <div class="handle"></div>
           </div>
         </label>
       </ion-item>
+      <ion-item class="item item-toggle">
+        Ограничивать результаты поиска
+        <label class="toggle toggle-assertive">
+          <input type="checkbox" ng-model="vm.settings.limitSearchResults" ng-checked="vm.settings.limitSearchResults" ng-click="vm.settingsSave()">
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+        </label>
+      </ion-item>
+      <label class="item item-input item-floating-label">
+        <span class="input-label">Количество результатов поиска</span>
+        <input type="text" ng-disabled="!vm.settings.limitSearchResults" ng-model="vm.settings.limitSearchResultsCount" 
+          ng-click="vm.settingsSave()" placeholder="Задайте ограничение результатов поиска">
       </label>
-    </div>
-
+    
+ </div>
     <div class="list list-inset">
       <ion-list show-reorder="true" delegate-handle="app.settings">
         <div class="item item-divider">
@@ -48,7 +61,7 @@
     <button ng-click="vm.rescan()" class="button button-outline1 button-block button-royal">
       Перечитать файлы
     </button>
-    <button ng-click="vm.restartApp()" class="button button-outline button-block button-energized">
+    <button ng-click="vm.restartApp()" class="button button-outline button-block button-positive">
       Применить
     </button>
     <!-- <h6>* Настройки вступят в силу после перезагрузки программы</h6> -->

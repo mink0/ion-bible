@@ -6,7 +6,7 @@
     .factory('bmodule', bmodule);
 
   /* @ngInject */
-  function bmodule($q, $cordovaSQLite, notify, common, mock) {
+  function bmodule($q, $cordovaSQLite, notify, common, mock, $filter) {
     function newModule(db) {
       return new BModule(db);
     }
@@ -54,6 +54,87 @@
 
       return d.promise;
     }
+    // BModule.prototype.getVersePath = function(chapterId, verseId) {
+    //   var self = this;
+    //   if (self.hasOwnProperty('books') && e.defaultModule.books.hasOwnProperty(bookId)) {
+    //     title = dataService.defaultModule.books[bookId].long_name + ' ' + chapterId + ': '  + verseId;
+    //   }
+    // };
+    BModule.prototype.search = function(stext) {
+      var d = $q.defer();
+      var self = this;
+      var query, vars;
+      var CLEN = 200;
+      var limiter = '';
+      
+      function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+      }
+      // FIXME: case insensitive search don't work with UTF in SQLite.
+      // Simple workaround:
+      var qtext = '"%' + stext + '%"' +' OR ' + 'text LIKE "%' + capitalizeFirstLetter(stext) + '%"';
+
+      if (common.settings.limitSearchResults) {
+        limiter = ' LIMIT ' + common.settings.limitSearchResultsCount;
+      }
+      if (self.type == 1) {
+        // comments
+        query = 'SELECT text, book_number, verse_number_from, verse_number_to, chapter_number_from, chapter_number_to FROM commentaries ' +
+          'WHERE text LIKE ' + qtext + ' ORDER BY book_number, chapter_number_from, verse_number_from' + limiter;
+      } else {
+        // book
+        query = 'SELECT text, book_number, chapter, verse FROM verses WHERE text LIKE ' + qtext + ' ORDER BY book_number, chapter, verse' + limiter;
+      }
+      function render(text) {
+        // speed up rendering
+        var out = text, pos, start, end;
+        if (self.type == 1) {
+          pos = text.search(new RegExp(stext, "i"));
+          if (pos > -1) {
+            start = pos - CLEN/2;
+            if (start < 0) start = 0;
+            end = pos + CLEN/2;
+            if (end > text.lenght - 1) end = text.lenght - 1;
+            out = text.slice(start, end);
+          }
+        }
+        out = $filter('searchFilter')(out, stext);
+        return out;
+      }
+
+      notify.show();
+      $cordovaSQLite.execute(this.db, query, qtext)
+        .then(function(res) {
+          var out = [], item;
+            for (var i = 0; i < res.rows.length; i++) {
+              item = {};
+              if (self.type == 1) {
+                item.type = 'comm';
+                item.verseId = res.rows.item(i).verse_number_from;
+                item.chapterId = res.rows.item(i).chapter_number_from;
+                item.bookId = res.rows.item(i).book_number;
+              } else {
+                item.type = 'book';
+                item.verseId = res.rows.item(i).verse;
+                item.chapterId = res.rows.item(i).chapter;
+                item.bookId = res.rows.item(i).book_number;
+              }
+              item.moduleId = self.db.dbname;
+              item.text = render(res.rows.item(i).text);
+              out.push(item);
+            }
+          
+          notify.hide();
+          return d.resolve(out);
+        }, function(err) {
+          notify.hide();
+          notify.alert(err);
+          return d.resolve([]);
+        });
+
+      return d.promise;
+    
+    };
     BModule.prototype.loadBooks = function() {
       var self = this;
       var d = $q.defer();
@@ -79,20 +160,25 @@
           .then(function(res) {
             var num;
             for (var i = 0; i < res.rows.length; i++) {
+              num = res.rows.item(i).book_number;
+              // change default color:
+              if (common.defaultBooks.hasOwnProperty(num)) {
+                res.rows.item(i).book_color = common.defaultBooks[num].book_color;
+              }
+              // add unknown modules
               if (self.type == 1) {
-                num = res.rows.item(i).book_number;
                 if (common.defaultBooks.hasOwnProperty(num)) {
                   self.books[num] = common.defaultBooks[num];
                 } else {
                   self.books[num] = {
                     "long_name": "Неизвестный модуль",
                     "short_name": num + '',
-                    "book_color": "#fff",
+                    "book_color": "#D0795A",
                     "book_number": num + ''
                   };
                 }
               } else {
-                self.books[res.rows.item(i).book_number] = res.rows.item(i);
+                self.books[num] = res.rows.item(i);
               }
             }
             //console.log(JSON.stringify(self.books));
@@ -190,15 +276,17 @@
       }
       return d.promise;
     };
-    //SELECT max(chapter), min(chapter)  FROM verses WHERE book_number = 470
-    //SELECT min(chapter_number_from), max(chapter_number_to) FROM commentaries WHERE book_number = 470
+    /**
+     * Used in content.reader
+     */
     BModule.prototype.loadPage = function(bookId, chapterId) {
-      notify.show();
+      //notify.show();
       var self = this;
       var d = $q.defer();
       var page = [];
       var query1, query2, vars1;
       if (self.type == 1) {
+        // comments
         query2 = 'SELECT min(chapter_number_from) as min, max(chapter_number_to) as max FROM commentaries WHERE book_number = ?';
         if (chapterId == 0) {
           // Intro text
@@ -208,11 +296,12 @@
           vars1 = [bookId];
         } else {
           query1 = 'SELECT text, verse_number_from, verse_number_to FROM commentaries ' +
-            'WHERE book_number = ? AND chapter_number_from >= ? AND chapter_number_to <= ?' +
+            'WHERE book_number = ? AND chapter_number_from = ? ' +
             'ORDER BY verse_number_from';
-          vars1 = [bookId, chapterId, chapterId];
+          vars1 = [bookId, chapterId];
         }
       } else {
+        // book
         query1 = 'SELECT verse, text FROM verses WHERE book_number = ? AND chapter = ? ORDER BY verse';
         query2 = 'SELECT min(chapter) as min, max(chapter) as max FROM verses WHERE book_number = ?';
         vars1 = [bookId, chapterId];
@@ -228,7 +317,7 @@
               var verse;
               if (chapterId == 0) {
                 verse = '[*]';
-              } else if (res.rows.item(i).verse_number_from == res.rows.item(i).verse_number_to) {
+              } else if (res.rows.item(i).verse_number_from == res.rows.item(i).verse_number_to || res.rows.item(i).verse_number_to === null) {
                 verse = res.rows.item(i).verse_number_from;
               } else {
                 verse = res.rows.item(i).verse_number_from + ' - ' + res.rows.item(i).verse_number_to;
@@ -243,7 +332,7 @@
               page.push(res.rows.item(i));
             }
           }
-          notify.hide();
+          //notify.hide();
           page.minChapNo = stat.rows.item(0).min;
           page.maxChapNo = stat.rows.item(0).max;
           d.resolve(page);

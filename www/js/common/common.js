@@ -24,9 +24,9 @@
 
     var service = {
       //settings: {},
-      //history: []
+      //history: [],
+      //ListSelectedMask: ListSelectedMask, // to highlight last selected element in list
       defaultModuleId: 'RST77.SQLite3',
-      ListSelectedMask: ListSelectedMask, // to highlight last selected element in list
       debug: false, //!!!window.cordova
     };
     return service;

@@ -1,0 +1,24 @@
+<div ng-controller="SearchCtrl as vm">
+  <label class="item item-input item-select assertive">
+    <div class="input-label">
+      Модуль
+    </div>
+    <select ng-model="vm.search.searchModuleId">
+      <option ng-repeat="module in vm.currentModules track by $index" ng-if="module.load">{{module.id}}</option>
+    </select>
+  </label>
+  <p></p>
+  <label class="item item-input">
+    <i class="icon ion-search placeholder-icon"></i>
+    <input type="text" placeholder="Поиск" ng-model="vm.search.searchText" ng-enter="vm.doSearch()" ng-trim="false">
+  </label>
+  <p></p>
+  <div class="button-bar">
+    <button ng-click="vm.cancel()" class="button button-light">
+      Отмена
+    </button>
+    <button ng-click="vm.doSearch()" class="button button-positive">
+      Найти
+    </button>
+  </div>
+</div>

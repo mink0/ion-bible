@@ -1,0 +1,29 @@
+<ion-view view-title="Результаты поиска: {{vm.search.searchResults.length}} совпадений" class="reader">
+  <ion-content overflow-scroll="true" class="padding search-results">
+    <!-- <ion-spinner icon="lines" class="spinner-energized"></ion-spinner> -->
+    <div ng-repeat="res in vm.search.searchResults track by $index">
+      <div class="card" ui-sref="app.reader({moduleId: vm.search.searchModuleId, bookId: res.bookId, chapterId: res.chapterId, searchText: vm.search.searchText})">
+        <div class="item item-text-wrap">
+          <div html-compile="res.text"></div>
+          <div class="verse-title">{{vm.getTitle(res.bookId, res.chapterId, res.verseId)}}</div>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+  <div class="bar bar-footer bar-dark footer-search">
+    <div class="item item-input wrap">
+      <label class="item-input-wrapper">
+        <input type="text"
+          placeholder="Поиск"
+          ng-model="vm.search.searchText"
+          ng-enter="vm.search.doSearch()"
+          ng-focus="vm.onSearchFocus()"
+          ng-blur="vm.onSearchBlur()"
+          ng-trim="false"
+        >
+      </label>
+      <button ng-click="vm.search.doSearch()" class="button button-positive button-search icon ion-ios-search"></button>
+    </div>
+  </div>
+  <h1></h1>
+</ion-view>

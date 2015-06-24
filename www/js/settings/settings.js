@@ -39,7 +39,11 @@
 
       return d.promise;
     }
-
+    
+    /**
+     * save all settings into storage
+     * @param  {[Object]} prop
+     */
     function save(prop) {
       if (prop && typeof prop === 'object') angular.extend(common.settings, prop);
       storage.setObject('settings', common.settings);
@@ -49,21 +53,23 @@
       // must be loaded at first state in the app
       var d = $q.defer();
       $ionicPlatform.ready(function() {
-        $http.get('js/bmodule/defaultBooks.json')
-          .success(function(books) {
+          $http.get('js/settings/defaultBooks.json').success(function(books) {
             common.defaultBooks = books;
             common.settings = storage.getObject('settings');
-            
+            if (Object.keys(common.settings).length > 0) {
+              return d.resolve(common.settings);
+            }
+          
             // init vars for the first time
-            if (!common.settings.hasOwnProperty('history')) {
-              common.settings.history = [];
-            }
-            if (!common.settings.hasOwnProperty('appFullScreen')) {
-              common.settings.appFullScreen = false;
-            }
-            d.resolve(common.settings);
+            $http.get('js/settings/defaultSettings.json').success(function(settings) {
+              console.log(settings);
+              common.settings = settings;
+              return d.resolve(common.settings);
+            }).error(function(err) {
+              notify.alert('Ошибка загрузки "defaultSettings.json"');
+            });
           })
-          .error(function() {
+          .error(function(err) {
             notify.alert('Ошибка загрузки "defaultBooks.json"');
           });
       });

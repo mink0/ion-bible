@@ -41,6 +41,17 @@
       
         // ionic related config
         $ionicConfig.tabs.position('bottom'); // place tabs
+
+        // app start scripts
+        appRestoreState.restoreAppState();
       });
     });
+
+  // enable native scrolling in Andorid
+  // To early right now....
+  // angular.module('bq')
+  //   .config(function($ionicConfigProvider) {
+  //     if (!ionic.Platform.isIOS()) $ionicConfigProvider.scrolling.jsScrolling(false);
+  //   });
+
 })();

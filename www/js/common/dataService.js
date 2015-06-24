@@ -6,7 +6,7 @@
     .factory('dataService', dataService);
 
   /* @ngInject */
-  function dataService($http, $q, $cordovaSQLite, $rootScope, $ionicPlatform, $timeout, notify, apiUrls, bmodule, mock, common, storage) {
+  function dataService($http, $q, $cordovaSQLite, $rootScope, $ionicPlatform, $ionicPopup, $state, notify, apiUrls, bmodule, mock, common, storage) {
     var service = {
       bmodules: {},
       initBModules: initBModules,
@@ -56,7 +56,17 @@
                 service.defaultModule = service.bmodules[defaultModuleId];
                 service.defaultModule.loadBooks(); // for verses modal title
               } else {
-                notify.flash('Не загружен дефолтный модуль ' + defaultModuleId + ' (полный функционал будет недоступен)');
+                // A confirm dialog
+                var confirmPopup = $ionicPopup.confirm({
+                  title: '',
+                  template: 'Не загружен модуль по умолчанию ' + defaultModuleId + '. Выбрать другой?'
+                });
+                confirmPopup.then(function(res) {
+                  if (res) {
+                    $state.go('app.settings');
+                  } 
+                });
+                
               }
               d.resolve(service.bmodules);
             },
@@ -116,7 +126,7 @@
     function loadPages(bookId, chapterId) {
       var d = $q.defer();
       var promises = {};
-
+      notify.show();  // will be hided in ContentReaderCtrl
       for (var moduleId in service.bmodules) {
         if (!service.bmodules.hasOwnProperty(moduleId)) return;
         promises[moduleId] = service.bmodules[moduleId].loadPage(bookId, chapterId);
